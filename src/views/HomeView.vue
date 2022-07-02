@@ -1,55 +1,28 @@
 <template>
-    <v-card
-    height="100%"
-    width="256"
-  >
-    <v-navigation-drawer permanent>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+  <v-container>
+    <h2 class="my-2">Viernes de Lanzamientos</h2>
+    <v-layout wrap style="gap: 20px">
+      <div v-for="(playlist, $index) of playlists" :key="$index">
+        <PlaylistCard :item="playlist"/>
+      </div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Photos', icon: 'mdi-image' },
-          { title: 'About', icon: 'mdi-help-box' },
-        ],
-        right: null,
-      }
-    },
-  }
+import { mapState } from "vuex";
+import PlaylistCard from "@/components/PlaylistCard.vue";
+import Store from "@/store/"
+export default {
+  components: { PlaylistCard },
+  beforeRouteEnter(to, from, next) {
+    Store.dispatch("playlists/getAllPlaylists");
+    next();
+  },
+  computed: {
+    ...mapState("playlists", {
+      playlists: (state) => state.playlists,
+    }),
+  },
+};
 </script>
