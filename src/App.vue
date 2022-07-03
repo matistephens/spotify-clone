@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-main row>
+    <v-main row style="background-color:#121212">
       <v-container width="100%">
         <NavigationDrawer />
-        <v-app-bar app>
+        <v-app-bar app style="background-color:#090909">
           <v-btn icon>
             <v-icon large>mdi-chevron-left</v-icon>
           </v-btn>
@@ -14,13 +14,13 @@
             <v-flex shrink> </v-flex>
           </v-layout>
 
-          <v-btn text color="a7a7a7" large> Sign up </v-btn>
+          <v-btn text color="#a7a7a7" large> Sign up </v-btn>
 
           <v-btn rounded color="white" dark large style="color=black">
             <span style="color: black">Log in</span>
           </v-btn>
         </v-app-bar>
-        <router-view></router-view>
+        <router-view />
       </v-container>
     </v-main>
   </v-app>
